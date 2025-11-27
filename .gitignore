@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+__pycache__
+*.pyc
+*.egg-info
+dist
+
+# Log
+*.log
+*.log.*
+
+#data
+*.jsonl
+*.json
+
+*.ply
+*.whl
+*.zip
+
+
+#slurm out 
+*.out
+
+# Data
+!**/alpaca-data-conversation.json
+
+# Editor
+.idea
+*.swp
+
+# Other
+.DS_Store
+wandb
+output
+
+checkpoints
+ckpts*
+
+.ipynb_checkpoints
+*.ipynb
+
+# DevContainer
+!.devcontainer/*
+
+# Demo
+serve_images/
+
+data/preprocessing/recon/saved_images/
+data/preprocessing/recon/ceph_data/arkitscenes_pairs
+finetune_data/saved_images/
+
+*.parquet
+*.npy
+
+results/*
+
+
+wandb/
+
+slurm/
+
+logs/
+
+
+*.pt
+
+*.out

@@ -114,34 +114,34 @@ snapshot_download(cache_dir=cache_dir,
 
 3️⃣ Run Inference from Command Line
 
-Try our example inference script. You can run it on a directory of images. Here is the script for 3D recontruction.
+Try our example inference script. 
+Here is the script for 3D recontruction.
 
 ```bash
 # Run with default example images
 python inference_recon.py
 
 # Run on your own data (image folder)
-python inference_recon.py --data_path <path/to/your/images_dir>
+python inference_recon.py --image_folder <path/to/your/images_dir>
 ```
 
-Here is the script for spatial reasoning task.
+Here is the script for spatial reasoning task. We encourage to try spatial reasoning with G<sup>2</sup>VLM-SR which will be released soon!
 
 ```bash
 # Run with default example images and default question
 python inference_chat.py
 
 # Run on your own data (image folder) and question
-python inference_recon.py --data_path <path/to/your/images_dir> --question "How far is the chair from me in the image?"
+python inference_chat.py --image_path <path/to/your/images> --question "user question"
 ```
 
 **Optional Arguments:**
 
-  * `--data_path`: Path to the input image directory or a video file. (Default: `examples/recon_images`)
-  * `--question`: Input question. (Default: `How far is the chair from me in the image?`)
+  * `--model_path`: Path to a custom model checkpoint file.
+  * `--image_folder`: Path to the input image directory. (Default: `examples/dl3dv`)
+  * `--image_path`: Path to the image, if you want to specify the image. (Default: `examples/25_0.jpg`)
+  * `--question`: Input question. (Default: `If the table (red point) is positioned at 2.6 meters, estimate the depth of the clothes (blue point).`)
   * `--save_path`: Path to save the output `.ply` point cloud. (Default: `examples/result.ply`)
-  * `--ckpt`: Path to a custom model checkpoint file.
-  * `--device`: Device to run inference on. (Default: `cuda`)
-
 
 
 ## 🔗 Citation
@@ -149,7 +149,7 @@ python inference_recon.py --data_path <path/to/your/images_dir> --question "How 
 If you find our work and this codebase helpful, please consider starring this repo 🌟 and cite:
 
 ```bibtex
-@{hu2025g2vlmgeometrygroundedvision,
+@article{hu2025g2vlmgeometrygroundedvision,
       title={G$^2$VLM: Geometry Grounded Vision Language Model with Unified 3D Reconstruction and Spatial Reasoning}, 
       author={Wenbo Hu and Jingli Lin and Yilin Long and Yunlong Ran and Lihan Jiang and Yifan Wang and Chenming Zhu and Runsen Xu and Tai Wang and Jiangmiao Pang},
       year={2025},
