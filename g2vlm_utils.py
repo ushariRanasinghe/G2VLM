@@ -28,17 +28,17 @@ import torchvision
 import open3d as o3d  # Optional but recommended for .ply saving (install with `pip install open3d`)
 import torch.nn.functional as F
 
-def load_model_and_tokenizer(args):
-    llm_config = Qwen2VLConfig.from_json_file(os.path.join(args.model_path, "text_config.json"))
+def load_model_and_tokenizer(model_path):
+    llm_config = Qwen2VLConfig.from_json_file(os.path.join(model_path, "text_config.json"))
 
     llm_config.qk_norm = True
     llm_config.tie_word_embeddings = False
     llm_config.layer_module = 'Qwen2VLMoTDecoderLayer'  
 
-    vit_config = Qwen2VLVisionConfig.from_json_file(os.path.join(args.model_path, "vit_config.json"))
+    vit_config = Qwen2VLVisionConfig.from_json_file(os.path.join(model_path, "vit_config.json"))
     vit_config.patch_size =14
 
-    dino_config = Dinov2WithRegistersConfig.from_json_file(os.path.join(args.model_path, "dino_config.json"))
+    dino_config = Dinov2WithRegistersConfig.from_json_file(os.path.join(model_path, "dino_config.json"))
 
     config = G2VLMConfig(
         visual_und=True,
@@ -54,13 +54,13 @@ def load_model_and_tokenizer(args):
 
     model = G2VLM(language_model, vit_model, dino_model, config)
 
-    tokenizer = Qwen2Tokenizer.from_pretrained(args.model_path)
+    tokenizer = Qwen2Tokenizer.from_pretrained(model_path)
     tokenizer, new_token_ids, _ = add_special_tokens(tokenizer)
 
     vit_image_transform = QwenVL2ImageTransform(768, 768, 14)
     dino_transform = DinoImageNormalizeTransform(target_size=518)
 
-    model_state_dict_path = os.path.join(args.model_path, "model.safetensors")
+    model_state_dict_path = os.path.join(model_path, "model.safetensors")
     model_state_dict = load_file(model_state_dict_path, device="cpu")
     msg = model.load_state_dict(model_state_dict, strict=False)
     print(msg)
